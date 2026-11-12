@@ -1,0 +1,26 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Local datasets and generated training outputs
+data/detector/
+data/classifier/
+data/public/
+data/raw_frames/
+models/**
+!models/.gitkeep
+reports/**
+!reports/.gitkeep
+logs/
+runs/
+*.pt
+*.onnx
+*.engine
+*.mp4

@@ -1,0 +1,24 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: traffic-sign-detector:latest
+    working_dir: /app
+    gpus: all
+    shm_size: "8gb"
+    environment:
+      MPLCONFIGDIR: /tmp/matplotlib
+      PYTHONUNBUFFERED: "1"
+      YOLO_CONFIG_DIR: /tmp/ultralytics
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./configs:/app/configs
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - trained-models:/app/models
+      - ./reports:/app/reports
+
+volumes:
+  trained-models:

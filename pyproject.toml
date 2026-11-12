@@ -1,0 +1,56 @@
+[project]
+name = "traffic-sign-detector"
+version = "0.1.0"
+description = "PyTorch and OpenCV prototype for Ghana traffic sign detection and recognition."
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "huggingface-hub>=0.33.0",
+    "numpy>=2.2.0",
+    "opencv-python>=4.10.0.84",
+    "pillow>=11.0.0",
+    "pyyaml>=6.0.2",
+    "scikit-learn>=1.6.0",
+    "torch>=2.7.0",
+    "torchvision>=0.22.0",
+    "tqdm>=4.67.0",
+    "ultralytics>=8.3.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3.0",
+]
+
+[project.scripts]
+train-detector = "traffic_sign_detector.cli:train_detector_main"
+train-classifier = "traffic_sign_detector.cli:train_classifier_main"
+evaluate = "traffic_sign_detector.cli:evaluate_main"
+realtime = "traffic_sign_detector.cli:realtime_main"
+validate-data = "traffic_sign_detector.cli:validate_data_main"
+tsr-env = "traffic_sign_detector.cli:env_main"
+extract-frames = "traffic_sign_detector.cli:extract_frames_main"
+download-public-data = "traffic_sign_detector.cli:download_public_data_main"
+prepare-public-data = "traffic_sign_detector.cli:prepare_public_data_main"
+
+[tool.uv]
+package = true
+
+[tool.uv.sources]
+torch = [
+    { index = "pytorch-cu126", marker = "platform_system == 'Windows' or platform_system == 'Linux'" },
+]
+torchvision = [
+    { index = "pytorch-cu126", marker = "platform_system == 'Windows' or platform_system == 'Linux'" },
+]
+
+[[tool.uv.index]]
+name = "pytorch-cu126"
+url = "https://download.pytorch.org/whl/cu126"
+explicit = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.setuptools.packages.find]
+include = ["traffic_sign_detector*"]
